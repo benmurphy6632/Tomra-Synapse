@@ -50,8 +50,9 @@ ENV HF_HOME=/home/appuser/.cache/huggingface
 ENV TRANSFORMERS_CACHE=/home/appuser/.cache/huggingface/transformers
 ENV TORCH_HOME=/home/appuser/.cache/torch
 
-ENV CLOUD_HOST=backend
-ENV CLOUD_PORT=9090
+ENV CLOUD_HOST=hopper.proxy.rlwy.net
+ENV CLOUD_PORT=28253
+ENV GRAPHQL_URL=https://tomra-synapse-backend-production.up.railway.app/graphql
 ENV DEVICE_ID=edge-device-001
 ENV IMAGE_FOLDER=/images
 

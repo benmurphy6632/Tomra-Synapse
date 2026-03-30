@@ -1,86 +1,42 @@
+version: "3.8"
+
 services:
-  backend:
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
-    container_name: backend
-    ports:
-      - "8080:8080"
-      - "9090:9090"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: ""
-      SPRING_H2_CONSOLE_ENABLED: "true"
-      EDGE_GRPC_JWT_ENABLED: "false"
-    networks:
-      - synapse-net
-    restart: unless-stopped
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-      args:
-        NEXT_PUBLIC_GRAPHQL_URL: http://localhost:8080/graphql
-    container_name: frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-    networks:
-      - synapse-net
-    restart: unless-stopped
-
-  classification-engine:
+  engine:
     build:
       context: .
       dockerfile: classification_engine/Dockerfile
-    container_name: classification-engine
+    container_name: tomra-synapse-classification-engine
     command: ["python", "-m", "app.engine_service"]
     env_file:
       - ./classification_engine/.env
     environment:
-      CLOUD_HOST: backend
-      CLOUD_PORT: 9090
+      CLOUD_HOST: hopper.proxy.rlwy.net
+      CLOUD_PORT: 28253
       DEVICE_ID: edge-device-001
       IMAGE_FOLDER: /images
-      GRAPHQL_URL: http://backend:8080/graphql
+      GRAPHQL_URL: https://tomra-synapse-backend-production.up.railway.app/graphql
       EDGE_GRPC_JWT_ENABLED: "false"
     volumes:
       - ./classification_engine/app/TestImages:/images
-    depends_on:
-      - backend
-    networks:
-      - synapse-net
     restart: unless-stopped
 
-  edge-runner:
+  classifier:
     build:
       context: .
       dockerfile: classification_engine/Dockerfile
-    container_name: edge-runner
+    container_name: tomra-synapse-classifier
     command: ["python", "-m", "app.edge_runner", "--folder", "/images"]
     env_file:
       - ./classification_engine/.env
     environment:
-      CLOUD_HOST: backend
-      CLOUD_PORT: 9090
+      CLOUD_HOST: hopper.proxy.rlwy.net
+      CLOUD_PORT: 28253
       DEVICE_ID: edge-device-001
       IMAGE_FOLDER: /images
-      GRAPHQL_URL: http://backend:8080/graphql
+      GRAPHQL_URL: https://tomra-synapse-backend-production.up.railway.app/graphql
       EDGE_GRPC_JWT_ENABLED: "false"
     volumes:
       - ./classification_engine/app/TestImages:/images
-    depends_on:
-      - backend
-    networks:
-      - synapse-net
     restart: "no"
     stop_signal: SIGTERM
     stop_grace_period: 30s
-
-networks:
-  synapse-net:
-    driver: bridge
