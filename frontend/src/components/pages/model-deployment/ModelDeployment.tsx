@@ -950,7 +950,10 @@ export default function ModelDeployment({ projectId }: { projectId: string }) {
       setIsStartingSession(true);
       setLoadButtonState("loading");
 
-      const response = await fetch("http://localhost:8080/graphql", {
+      const endpoint =
+        process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:8080/graphql";
+
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

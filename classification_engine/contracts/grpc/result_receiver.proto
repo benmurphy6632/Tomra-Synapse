@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package platform.resultreceiver;
+
+//  This proto file defines how Edge submits results to Cloud
+//  and how Cloud pushes deployment commands to Edge
+
+option java_package = "com.tomra.platform.grpc";
+option java_multiple_files = true;
+option java_outer_classname = "ResultReceiverProto";
+
+// Service for receiving classification results from edge devices
+service ResultReceiverService {
+  // Edge device submits classification result to cloud
+  rpc SubmitResult (ClassificationResult) returns (Acknowledgement);
+
+  // Edge device opens this stream on startup.
+  // Cloud pushes DeploymentCommands down it when ML Engineer triggers a deployment.
+  rpc SubscribeToDeployments (EdgeDeviceRegistration) returns (stream DeploymentCommand);
+
+  // Edge device calls this once after successfully loading the new model
+  rpc AcknowledgeDeployment (DeploymentAcknowledgement) returns (Acknowledgement);
+
+  // Edge device sends the list of models it currently has available
+  rpc SyncAvailableModels (AvailableModelsSyncRequest) returns (Acknowledgement);
+}
+
+// What Edge Sends.
+message ClassificationResult {
+  string ID = 1; // Cindy mentions in her front end overwiew that we need an ID
+  string image_name = 2; // Image filename
+  bytes image_data = 3; //  raw image bytes
+  string predicted_label = 4; // Classification label (e.g., "beer_bottle")
+  float confidence = 5; // Confidence score (0.0 - 1.0) AS A FLOAT
+  string model = 6; // Model version used
+  //string filename = 7; // Name of the file (Probably redundant due to image_name)
+  int32 classID = 8; // Class ID of the label (eg 950 for "orange")
+  double latency = 9; // Tommy - Timestamp added
+  string image_url = 10; // Tommy - Image URL added
+  float power_usage = 11; // Tommy - Power Usage added
+  float co2_emissions = 12; // Tommy - CO2 Emissions added
+  string project_id = 13; // Project this classification belongs to
+  //int64 timestamp = 9;         // Unix timestamp -> optinal for now not sure if this does date like ben asked?
+}
+
+// Acknowledgement from cloud
+message Acknowledgement {
+  bool received = 1; // True if recieved successfully
+  string message = 2; // Optional message e.g "Result received successfully" or error details
+}
+
+// Sent by edge when opening the deployment subscription stream.
+// Identifies which device is connecting.
+message EdgeDeviceRegistration {
+  string device_id = 1;
+}
+
+// Sent by cloud down the stream to tell the edge to load a new model
+message DeploymentCommand {
+  string model_name = 1; // e.g. "resnet101"
+  int32 canary_percentage = 2; // e.g. 10 means 10% of traffic goes to new model
+  string deployment_id = 3; // unique ID so the edge can reference it in acknowledgement
+}
+
+// Sent by edge after successfully loading the new model
+message DeploymentAcknowledgement {
+  string device_id = 1; // which edge device is confirming
+  string deployment_id = 2; // matches the deployment_id from DeploymentCommand
+  string loaded_model = 3; // confirms what model is now loaded
+  bool success = 4; // true if loaded successfully
+  string message = 5; // optional detail e.g. "resnet101 loaded, canary at 10%" or "failed to load new model"
+}
+
+// One available model from the registry
+message AvailableModel {
+  string name = 1;
+}
+
+// Full model list sync from edge to backend
+message AvailableModelsSyncRequest {
+  string device_id = 1;
+  repeated AvailableModel models = 2;
+}
