@@ -188,7 +188,7 @@
                     - Shared between Java backend and Python classifier service
                     - If you add new .proto files, put them in ../contracts/grpc/
                     -->
-                    <protoSourceRoot>${project.basedir}/../contracts/grpc</protoSourceRoot>
+                    <protoSourceRoot>${project.basedir}/contracts/grpc</protoSourceRoot>
                     
                     <protocArtifact>
                         com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
