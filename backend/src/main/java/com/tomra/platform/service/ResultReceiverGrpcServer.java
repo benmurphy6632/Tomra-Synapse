@@ -63,7 +63,7 @@ import jakarta.annotation.PreDestroy;
 public class ResultReceiverGrpcServer extends ResultReceiverServiceGrpc.ResultReceiverServiceImplBase {
 
     private Server server;
-    private static final int GRPC_PORT = 9090;
+    private static final int GRPC_PORT = 50051;
 
     private static final int STATUS_ARCHIVED = 0;
     private static final int STATUS_CANARY = 1;
