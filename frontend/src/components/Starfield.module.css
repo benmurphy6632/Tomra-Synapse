@@ -1,0 +1,27 @@
+/* Fullscreen background container */
+.root {
+  position: fixed;
+  inset: 0;
+  background: #000008;
+  overflow: hidden;
+  z-index: -1; /* stays behindUI */
+}
+
+/* Canvas where stars are drawn */
+.canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* Optional vignette overlay to add depth */
+.vignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+}

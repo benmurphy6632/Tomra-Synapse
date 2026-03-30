@@ -1,0 +1,101 @@
+type Query {
+  health: Health
+  engineOutputs(projectId: String!): [EngineOutput]
+  engineOutputsAll: [EngineOutput]
+  feedbackStats(projectId: String!): FeedbackStats
+  feedbackVotes(projectId: String!): [FeedbackVote!]!
+  availableModels: [AvailableModel!]!
+  activeSession(projectId: String!): ActiveSession
+  activeSessions: [ActiveSession!]!
+}
+
+type Health {
+  status: String
+  uptime: Float
+  services: [ServiceStatus]
+}
+
+type ServiceStatus {
+  name: String
+  status: String
+}
+
+type EngineOutput {
+  id: ID!
+  deviceId: String
+  imageName: String
+  predictedLabel: String
+  confidence: Float
+  model: String
+  classId: Int
+  latency: Float
+  imageURL: String
+  powerUsage: Float
+  co2Emissions: Float
+}
+
+type AvailableModel {
+  name: String!
+}
+
+type Mutation {
+  voteFeedback(
+    resultId: ID!
+    projectId: String!
+    model: String!
+    imageName: String!
+    deviceId: String!
+    imageURL: String!
+    vote: VoteType!
+  ): Boolean
+
+  removeVote(
+    projectId: String!
+    resultId: ID!
+  ): Boolean
+
+  startSession(
+    projectId: String!
+    stableModel: String
+    canaryModel: String
+    stablePercent: Int!
+    canaryPercent: Int!
+  ): ActiveSession
+
+  deactivateActiveSession(
+    projectId: String!
+  ): Boolean
+}
+
+enum VoteType {
+  UP
+  DOWN
+  UNSURE
+}
+
+type FeedbackStats {
+  up: Int!
+  down: Int!
+  unsure: Int!
+}
+
+type FeedbackVote {
+  resultId: ID!
+  projectId: String!
+  model: String!
+  imageName: String!
+  deviceId: String!
+  imageURL: String!
+  vote: String!
+}
+
+type ActiveSession {
+  sessionId: String!
+  projectId: String!
+  stableModel: String
+  canaryModel: String
+  stablePercent: Int!
+  canaryPercent: Int!
+  status: String!
+  createdAt: String!
+}

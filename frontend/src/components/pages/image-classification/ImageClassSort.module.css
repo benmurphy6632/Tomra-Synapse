@@ -1,0 +1,125 @@
+.sortWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(16px);
+  position: relative;
+  z-index: 60;
+}
+
+.sortLabel {
+  display: none;
+}
+
+.dropdown {
+  position: relative;
+  z-index: 61;
+}
+
+.sortButton {
+  border: none;
+  cursor: pointer;
+  padding: 0.35rem 0.7rem;
+  border-radius: 0.6rem;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  background: rgba(37, 99, 235, 0.9);
+  transition: 0.15s ease;
+  min-height: 32px;
+  min-width: 130px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  line-height: 1;
+}
+
+.sortButton:hover {
+  background: rgba(59, 130, 246, 1);
+}
+
+.sortButton:focus-visible {
+  background: rgba(59, 130, 246, 1);
+  outline: none;
+}
+
+.sortButtonText {
+  white-space: nowrap;
+}
+
+.chevron {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.menu {
+  composes: panel from "@/styles/panel.module.css";
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 9999;
+  min-width: 100%;
+  padding: 8px;
+  border-radius: 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.option {
+  width: 100%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  padding: 11px 12px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 0.96rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease;
+}
+
+.option:hover {
+  border-color: rgba(60, 140, 255, 0.38);
+  background: rgba(37, 99, 235, 0.14);
+  color: white;
+}
+
+.option:focus-visible {
+  border-color: rgba(90, 170, 255, 0.65);
+  background: rgba(37, 99, 235, 0.16);
+  box-shadow: 0 0 0 1px rgba(90, 170, 255, 0.16);
+  color: white;
+}
+
+.optionSelected {
+  border-color: rgba(60, 140, 255, 0.42);
+  background: rgba(37, 99, 235, 0.2);
+  color: white;
+}
+
+.checkmark {
+  color: rgba(130, 200, 255, 0.95);
+  font-weight: 800;
+}

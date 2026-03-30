@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scrollbar-gutter: stable; }
+html, body { margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  overflow-y: scroll;
+  background: #000;
+  color: #fff;
+}
+
+/* Force ALL elements to use Roboto */
+* {
+  font-family: inherit;
+}

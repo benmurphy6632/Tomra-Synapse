@@ -1,0 +1,419 @@
+.shell {
+  margin-left: 5rem; /* sidebar collapsed width (80px) */
+}
+
+.page {
+  min-height: 100vh;
+  padding: 28px;
+  color: white;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.newProjectBtn {
+  border: 2px solid rgba(60, 140, 255, 0.55);
+  background: rgba(10, 55, 150, 0.85);
+  color: white;
+
+  padding: 12px 18px;
+  border-radius: 14px;
+
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.newProjectBtn:hover {
+  border-color: rgba(120, 190, 255, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.25),
+    0 0 28px rgba(60, 140, 255, 0.25);
+  transform: translateY(-1px);
+  background: rgba(15, 70, 190, 0.9);
+}
+
+.newProjectBtn:active {
+  transform: translateY(0px);
+}
+
+.content {
+  margin-top: 22px;
+}
+
+.placeholderCard {
+  composes: panel from "@/styles/panel.module.css";
+  width: min(720px, 100%);
+  padding: 22px;
+  border-radius: 18px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.placeholderTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.placeholderText {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.inlineLink {
+  background: none;
+  border: none;
+  padding: 0;
+
+  font: inherit;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+
+  text-decoration: underline;
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.inlineLink:hover {
+  color: rgba(160, 220, 255, 1);
+}
+
+/* ===== Projects grid ===== */
+
+.projectsGrid {
+  margin-top: 18px;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(600, 600)); /* flexible but capped */
+  justify-content: center;  /* keeps them centered */
+  column-gap: 60px;        /* horizontal spacing */
+  row-gap: 24px;            /* vertical spacing */
+}
+
+@media (max-width: 1400px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+    column-gap: 0;
+    row-gap: 20px;
+  }
+}
+
+/* ===== Modal overlay (used by BOTH modals) ===== */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* ===== Create Project modal ===== */
+
+.modal,
+.modal * {
+  box-sizing: border-box;
+}
+
+.modal {
+  width: min(680px, calc(100vw - 32px));
+  border-radius: 20px;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  background: rgba(15, 23, 42);
+  border: 2px solid rgba(60, 140, 255, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(60, 140, 255, 0.18),
+    0 0 40px rgba(0, 0, 0, 0.35);
+
+  padding: 18px;
+  overflow: hidden;
+  color: white;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 4px 4px 12px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 14px;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.closeBtn {
+  height: 38px;
+  width: 38px;
+  border-radius: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.closeBtn:hover {
+  border-color: rgba(120, 190, 255, 0.65);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.18),
+    0 0 22px rgba(60, 140, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.label {
+  display: grid;
+  gap: 8px;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border-radius: 14px;
+  padding: 12px 14px;
+
+  color: white;
+  background: rgba(255, 255, 255, 0.06);
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  outline: none;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.textarea {
+  resize: none;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: rgba(120, 190, 255, 0.75);
+  box-shadow: 0 0 0 2px rgba(120, 190, 255, 0.18);
+}
+
+.errorText {
+  margin-top: -4px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: rgba(255, 140, 140, 0.95);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+/* Buttons (shared across modals) */
+
+.secondaryBtn {
+  padding: 11px 16px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: white;
+
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.secondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.primaryBtn {
+  padding: 11px 16px;
+  border-radius: 14px;
+
+  background: rgba(15, 70, 190, 0.9);
+  border: 2px solid rgba(60, 140, 255, 0.55);
+  color: white;
+
+  font-weight: 800;
+  cursor: pointer;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.primaryBtn:hover {
+  border-color: rgba(120, 190, 255, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.25),
+    0 0 28px rgba(60, 140, 255, 0.25);
+  transform: translateY(-1px);
+  background: rgba(18, 82, 220, 0.95);
+}
+
+.primaryBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== Delete confirmation modal ===== */
+
+.confirmModal,
+.confirmModal * {
+  box-sizing: border-box;
+}
+
+.confirmModal {
+  composes: panel from "@/styles/panel.module.css";
+  width: min(520px, calc(100vw - 32px));
+  border-radius: 20px;
+  padding: 18px;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 2px solid rgba(255, 120, 120, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(255, 120, 120, 0.14),
+    0 0 40px rgba(0, 0, 0, 0.35);
+
+  color: white;
+}
+
+.confirmTitle {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.confirmText {
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 8px;
+}
+
+.confirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.dangerBtn {
+  padding: 11px 16px;
+  border-radius: 14px;
+
+  background: rgba(190, 30, 30, 0.9);
+  border: 2px solid rgba(255, 120, 120, 0.55);
+  color: white;
+
+  font-weight: 900;
+  cursor: pointer;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.dangerBtn:hover {
+  border-color: rgba(255, 170, 170, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(255, 140, 140, 0.22),
+    0 0 28px rgba(255, 80, 80, 0.18);
+  transform: translateY(-1px);
+  background: rgba(220, 40, 40, 0.95);
+}
+
+.deleteKeyword {
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: rgba(255, 210, 210, 0.95);
+}
+
+.confirmInput {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  margin-top: 6px;
+  margin-bottom: 6px;
+
+  border-radius: 14px;
+  padding: 10px 14px;
+
+  color: white;
+  background: rgba(255, 255, 255, 0.06);
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  outline: none;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.confirmInput:focus {
+  border-color: rgba(255, 160, 160, 0.75);
+  box-shadow: 0 0 0 2px rgba(255, 120, 120, 0.16);
+}

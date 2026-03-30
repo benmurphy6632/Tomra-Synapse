@@ -1,0 +1,492 @@
+.shell {
+  margin-left: 5rem; /* sidebar collapsed width */
+}
+
+/* ===== Page Layout ===== */
+.page {
+  height: 90vh;
+  padding: 28px;
+  padding-top: 8px;
+  color: white;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.pageHeader {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: -0.02em;
+}
+
+.pageSubline {
+  margin-bottom: 1.5rem;
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgb(100, 170, 255);
+}
+
+/* ===== Wrapper ===== */
+.wrapper {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  font-family: inherit;
+}
+
+.wrapper * {
+  font-family: inherit;
+}
+
+/* ===== Panel ===== */
+.panel {
+  composes: panel from "@/styles/panel.module.css";
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ===== Panel Header ===== */
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panelTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.panelSubtitle {
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ===== Add Models Button ===== */
+.addModelsButton {
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  background: rgba(12, 12, 18, 0.88);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.addModelsButton:hover {
+  border-color: rgba(96, 165, 250, 0.6);
+  background: rgba(20, 20, 28, 0.95);
+  color: rgba(255, 255, 255, 0.98);
+  transform: translateY(-1px);
+}
+
+/* ===== Table Wrapper ===== */
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ===== Table ===== */
+.table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;
+}
+
+/* ===== Sticky Header ===== */
+.thead {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.headRow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.th {
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 6;
+
+  background: rgba(0, 0, 0, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ===== Column Widths (5 columns) ===== */
+.th:nth-child(1),
+.td:nth-child(1) {
+  width: 24%;
+}
+
+.th:nth-child(2),
+.td:nth-child(2) {
+  width: 16%;
+}
+
+.th:nth-child(3),
+.td:nth-child(3) {
+  width: 16%;
+}
+
+.th:nth-child(4),
+.td:nth-child(4) {
+  width: 28%;
+}
+
+.th:nth-child(5),
+.td:nth-child(5) {
+  width: 16%;
+}
+
+/* ===== Rows ===== */
+.bodyRow {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.15s ease;
+}
+
+.bodyRow:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.td {
+  padding: 0.75rem 1.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Status Badges ===== */
+.badgeStable {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  padding: 0.32rem 0.7rem;
+  border-radius: 6px;
+  background: #2f6df6;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.badgeCanary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  padding: 0.32rem 0.7rem;
+  border-radius: 6px;
+  background: #2f8fbe;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.badgeArchived {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  padding: 0.32rem 0.7rem;
+  border-radius: 6px;
+  background: #3b4458;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+/* ===== Empty State ===== */
+.empty {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== Footer Spacer ===== */
+.panelFooterSpace {
+  height: 12px;
+}
+
+/* ===== Modal ===== */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modalCard {
+  width: min(720px, 100%);
+  max-height: 80vh;
+  overflow: hidden;
+
+  border-radius: 18px;
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  background: rgba(12, 12, 18, 0.96);
+
+  box-shadow:
+    0 0 0 1px rgba(37, 99, 235, 0.12),
+    0 18px 48px rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.modalTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.modalSubtitle {
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.modalCloseButton {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.modalCloseButton:hover {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.modalBody {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 1rem 1.25rem 1.25rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.modalScrollArea {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+}
+
+/* ===== Model List ===== */
+.modelList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 24px;
+}
+
+.modelListName {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.modelListMeta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.modelListItemButton {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.modelListItemButton:hover {
+  border-color: rgba(96, 165, 250, 0.45);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-1px);
+}
+
+.modelListItemRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.checkBox {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: transparent;
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.checkBoxChecked {
+  color: rgba(255, 255, 255, 0.96);
+  border-color: rgba(96, 165, 250, 0.7);
+  background: rgba(96, 165, 250, 0.22);
+}
+
+/* ===== Action Menu ===== */
+.actionMenu {
+  position: fixed;
+  z-index: 200;
+
+  background: rgba(10, 12, 20, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  padding: 6px;
+  min-width: 180px;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.actionMenuItem {
+  width: 100%;
+  text-align: left;
+
+  background: transparent;
+  border: none;
+
+  padding: 8px 10px;
+  border-radius: 8px;
+
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.actionMenuItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.descriptionButton {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.72);
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.descriptionButton:hover {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.descriptionInput {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  font: inherit;
+  outline: none;
+}
+
+.descriptionInput:focus {
+  border-color: rgba(96, 165, 250, 0.6);
+}
+
+.actionsButton {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.actionsButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.modelLinkButton {
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: rgba(103, 232, 249, 0.95);
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.modelLinkButton:hover {
+  text-decoration: underline;
+}

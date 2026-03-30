@@ -1,0 +1,8 @@
+.panel {
+  border-radius: 1rem;
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  background: rgba(12, 12, 18, 0.88);
+  box-shadow:
+    0 0 0 1px rgba(37, 99, 235, 0.15),
+    0 8px 30px rgba(0, 0, 0, 0.6);
+}

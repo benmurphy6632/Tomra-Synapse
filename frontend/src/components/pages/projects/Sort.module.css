@@ -1,0 +1,144 @@
+.sortWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.sortLabel {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.sortButton {
+  border: 2px solid rgba(60, 140, 255, 0.55);
+  background: rgba(10, 55, 150, 0.85);
+  color: white;
+
+  min-width: 200px;
+  padding: 12px 16px;
+  border-radius: 14px;
+
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  cursor: pointer;
+  outline: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  line-height: 1;
+
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.sortButton:hover {
+  border-color: rgba(120, 190, 255, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.25),
+    0 0 28px rgba(60, 140, 255, 0.25);
+  background: rgba(15, 70, 190, 0.9);
+}
+
+.sortButton:focus-visible {
+  border-color: rgba(120, 190, 255, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.25),
+    0 0 28px rgba(60, 140, 255, 0.25);
+  background: rgba(15, 70, 190, 0.9);
+}
+
+.sortButtonText {
+  white-space: nowrap;
+}
+
+.chevron {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.menu {
+  composes: panel from "@/styles/panel.module.css";
+
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 30;
+
+  min-width: 100%;
+  padding: 8px;
+  border-radius: 16px;
+
+  display: grid;
+  gap: 6px;
+}
+
+.option {
+  width: 100%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+
+  padding: 11px 12px;
+  border-radius: 12px;
+
+  font: inherit;
+  font-size: 0.96rem;
+  font-weight: 600;
+  text-align: left;
+
+  cursor: pointer;
+  outline: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease;
+}
+
+.option:hover {
+  border-color: rgba(60, 140, 255, 0.38);
+  background: rgba(37, 99, 235, 0.14);
+  color: white;
+}
+
+.option:focus-visible {
+  border-color: rgba(90, 170, 255, 0.65);
+  background: rgba(37, 99, 235, 0.16);
+  box-shadow: 0 0 0 1px rgba(90, 170, 255, 0.16);
+  color: white;
+}
+
+.optionSelected {
+  border-color: rgba(60, 140, 255, 0.42);
+  background: rgba(37, 99, 235, 0.2);
+  color: white;
+}
+
+.checkmark {
+  color: rgba(130, 200, 255, 0.95);
+  font-weight: 800;
+}

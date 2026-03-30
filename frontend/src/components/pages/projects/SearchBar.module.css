@@ -1,0 +1,94 @@
+.searchWrap {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Panel-style container */
+.inputWrap {
+  composes: panel from "@/styles/panel.module.css";
+
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  min-width: 360px;
+  padding: 6px 8px;
+
+  border-radius: 14px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.inputWrap:hover {
+  border-color: rgba(120, 190, 255, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.18),
+    0 0 22px rgba(60, 140, 255, 0.18);
+}
+
+.inputWrap:focus-within {
+  border-color: rgba(120, 190, 255, 0.75);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.22),
+    0 0 26px rgba(60, 140, 255, 0.22);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+
+  padding: 10px 12px;
+
+  background: transparent;
+  color: white;
+
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.clearBtn {
+  flex-shrink: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.86);
+
+  padding: 8px 12px;
+  border-radius: 10px;
+
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.clearBtn:hover {
+  border-color: rgba(120, 190, 255, 0.7);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.18),
+    0 0 18px rgba(60, 140, 255, 0.15);
+  background: rgba(37, 99, 235, 0.12);
+}

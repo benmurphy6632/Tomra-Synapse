@@ -1,0 +1,341 @@
+.shell {
+  margin-left: 5rem; /* sidebar collapsed width (80px) */
+}
+
+/* ===== Page Layout (No Page Scroll) ===== */
+.page {
+  height: 110vh;              /* Lock to viewport */
+  padding: 28px;
+  padding-top: 35px;
+  color: white;
+
+  overflow-y: auto;   
+  overflow: hidden;    
+  display: flex;
+  flex-direction: column;
+}
+
+/* === header ============================== */
+.header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 0.25rem;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: rgba(134,239,172,0.7);
+  margin: 0;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.05em;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* === main grid ============================== */
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 31% 68%;
+  margin-bottom: 3rem;
+  grid-template-rows: auto 60% auto;
+  gap: 1.1rem;
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+/* === panels ============================== */
+.panel {
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(9,119,60,0.45);
+  border-radius: 1rem;
+  padding: 1.3rem 1.5rem 1.2rem;
+  transition: 
+    border-color 0.25s, 
+    box-shadow 0.25s;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.15rem;
+}
+
+.panelTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+.panelValue {
+  font-size: 1rem;
+  margin-top: .3rem;
+  font-weight: 600;
+}
+
+.panelSub {
+  display: flex;
+  flex: 4rem;
+  font-size: 0.7rem;
+  color: rgba(134,239,172,0.5);
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.03rem;
+}
+
+.colStack {
+  display: flex;
+  flex-direction: row;
+  gap: 1.1rem;
+  width: 100%;;
+}
+
+.colStack .panel {
+  flex: 1;
+}
+
+/* === Chart ============================== */
+.chartWrap {
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  min-width: 0
+}
+
+.chartValue {
+  font-size: 0.95rem;
+  font-weight: 550;
+  color: #cdd8cf;
+}
+
+.axisRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+}
+
+.axisLabel {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.25);
+}
+
+/* === CPU/GPU usage============================== */
+.usageRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.usageWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.usageLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(134,239,172,0.65);
+}
+
+.usageCharts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.donut {
+  --size: 120px;
+  --thickness: 13px;
+  --p: 60;           /* percent */
+
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 5%;
+  margin-top: 15%;
+
+  /*Donut ring*/
+  background:
+    conic-gradient(
+      #4ade80 calc(var(--p) * 1%),
+      rgba(225, 225, 225, 0.1) 0
+    );
+
+  box-shadow: 
+    0 0 10px rgba(74, 222, 128, 0.35),
+    inset 0 0 8px rgba(0,0,0,0.6);
+}
+
+/* Hole */
+.donut::before {
+  content: "";
+  position: absolute;
+  inset: var(--thickness);
+  background: rgba(0,0,0,0.85);
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+}
+
+/* Center % text */
+.donut::after {
+  content: attr(data-value);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+/* === power bar ============================== */
+.powerBar {
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  margin-top: 0.2rem;
+  overflow: hidden;
+}
+
+.powerBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #16a34a, #4ade80);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 8px rgba(74,222,128,0.5);
+}
+
+.powerLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.3rem;
+}
+
+.powerLabels span {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.25);
+}
+
+/* === Score Badge ============================== */
+.scoreBadge {
+  display: inline-block;
+  margin-top: 0.9rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* === Efficiency track ============================== */
+.efficiencyTrack {
+  position: relative;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  margin: .5rem 0 0.5rem;
+  overflow: visible;
+}
+
+.efficiencyFill {
+  height: 100%;
+  background: linear-gradient(90deg, #15803d, #4ade80, #86efac);
+  border-radius: 999px;
+  transition: width 0.6s ease;
+  box-shadow: 0 0 12px rgba(74,222,128,0.4);
+}
+
+/* === Panel help Btn ============================== */
+.panelHelp {
+  position: relative;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 1.3px solid rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.35);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: grid;
+  place-items: center;
+  cursor: help;
+  transition: all 0.2s ease;
+}
+
+.panelHelp:hover {
+  color: #4ade80;
+  border-color: rgba(74,222,128,0.5);
+  box-shadow: 0 0 8px rgba(74,222,128,0.35);
+}
+
+/* Tooltip bubble */
+.tooltip {
+  position: absolute;
+  bottom: 130%;
+  right: 0;
+  width: 240px;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+
+  background: rgba(10,14,18,0.95);
+  border: 1px solid rgba(74,222,128,0.35);
+  box-shadow: 0 0 18px rgba(74,222,128,0.2);
+
+  color: rgba(255,255,255,0.85);
+
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: all 0.18s ease;
+  z-index: 10;
+}
+
+.panelHelp:hover .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}

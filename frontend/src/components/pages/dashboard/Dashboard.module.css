@@ -1,0 +1,284 @@
+/* ── Shell ── */
+.shell {
+  margin-left: 5rem;
+  min-height: 100vh;
+  padding: 0 1.5rem 3rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Project title row ── */
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 35px;
+  margin-bottom: 1.5rem;
+  padding-left: 0.25rem;
+}
+
+.projectTitle {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1;
+  margin: 0 0 0.3rem;
+}
+
+.projectSub {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.activeBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.3rem 0.75rem;
+  border-radius: 99px;
+  border: 1px solid rgba(52, 241, 153, 0.3);
+  background: rgba(52, 241, 153, 0.06);
+  font-size: 11px;
+  color: rgba(52, 241, 153, 0.8);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+.activeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(52, 241, 153);
+  box-shadow: 0 0 6px rgba(52, 241, 153, 0.8);
+}
+
+/* ── Main grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.25rem;
+  flex: 1;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .rightCol {
+    order: -1;
+  }
+}
+
+/* ── Columns ── */
+.leftCol,
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Panel wrappers ──
+   Force panels out of absolute/fixed positioning
+   so they flow correctly in the grid.           */
+.panelWrap,
+.panelWrapTall {
+  width: 100%;
+  /* Create a new stacking context so the corner arrow
+     positions relative to the panel, not the page */
+  position: relative;
+  isolation: isolate;
+}
+
+/* Strip any absolute positioning injected by Tailwind
+   height utility classes from DashboardPanelShell    */
+.panelWrap > *,
+.panelWrapTall > * {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  width: 100% !important;
+}
+
+/* Override fixed vh heights so panels grow with content */
+.panelWrap :global(.h-\[30vh\]) {
+  height: auto !important;
+  min-height: 300px;
+}
+
+.panelWrap :global(.h-\[45vh\]) {
+  height: auto !important;
+  min-height: 340px;
+}
+
+.panelWrap :global(.h-\[14vh\]) {
+  height: auto !important;
+  min-height: 140px;
+}
+
+.panelWrapTall :global(.h-\[70vh\]) {
+  height: auto !important;
+  min-height: 500px;
+}
+
+/* ── Shared panel style ──
+   Applied by DashboardPanelShell via styles.panel  */
+.panel {
+  position: relative;
+  border-radius: 1rem;
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  background: rgba(12, 12, 18, 0.88);
+  box-shadow:
+    0 0 0 1px rgba(37, 99, 235, 0.15),
+    0 8px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.panel:not(.noHover):hover {
+  border-color: rgba(50, 200, 220, 0.7);
+  box-shadow:
+    0 0 0 1px rgba(50, 200, 220, 0.25),
+    0 0 28px rgba(50, 200, 220, 0.2),
+    0 8px 30px rgba(0, 0, 0, 0.6);
+  background-color: rgba(12, 12, 22, 0.94);
+}
+
+.noHover {
+}
+
+/* ── Corner arrow ── */
+.cornerArrow {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 28px;
+  line-height: 1;
+  transform-origin: center;
+  will-change: transform;
+  backface-visibility: hidden;
+  transition:
+    transform 0.22s ease,
+    color 0.22s ease;
+}
+
+.panel:not(.noHover):hover .cornerArrow {
+  transform: scale(1.25);
+  color: rgba(50, 200, 220, 0.9);
+}
+
+/* ── Traffic Panel ── */
+.trafficContainer {
+  width: 100%;
+  padding: 24px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.trafficTitle {
+  font-size: clamp(16px, 1.15vw, 22px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.trafficLegend {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: clamp(12px, 0.85vw, 15px);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legendStable {
+  background: rgb(59, 110, 255);
+}
+.legendCanary {
+  background: rgb(75, 166, 209);
+}
+
+.legendLabel {
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+}
+
+.legendPercent {
+  color: rgb(94, 175, 255);
+  font-size: clamp(18px, 1.2vw, 28px);
+  line-height: 1;
+}
+
+.legendDivider {
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.trafficBarWrapper {
+  margin-top: 16px;
+  width: 100%;
+}
+
+.trafficBar {
+  position: relative;
+  height: 8px;
+  width: 97%;
+}
+
+.barStable {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 8px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: rgb(82, 122, 245);
+}
+
+.barCanary {
+  position: absolute;
+  top: 50%;
+  height: 8px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: rgb(92, 194, 232);
+}
+
+.trafficLabels {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: clamp(11px, 0.75vw, 13px);
+  color: rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,242 @@
+.projectCard {
+  composes: panel from "@/styles/panel.module.css";
+  color: white;
+  width: min(820px, 100%);
+  text-align: left;
+
+  padding: 18px;
+  border-radius: 18px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.12s ease;
+}
+
+.projectCard:focus-visible {
+  outline: 2px solid rgba(120, 190, 255, 0.55);
+  outline-offset: 3px;
+}
+
+.projectCard:hover {
+  border-color: rgba(120, 190, 255, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.18),
+    0 0 28px rgba(60, 140, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.projectTopRow {
+  display: grid;
+  gap: 8px;
+}
+
+.projectTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.projectName {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+/* 🔧 IMPORTANT: anchor for dropdown */
+.projectTopRight {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+/* ===== Shared button base ===== */
+
+.actionBtn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+
+  padding: 8px 10px;
+  border-radius: 12px;
+
+  font-size: 0.85rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 1;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.12s ease;
+}
+
+/* ===== More button ===== */
+
+.moreBtn {
+  composes: actionBtn;
+  font-size: 1rem; /* slightly larger dots */
+}
+
+.moreBtn:hover {
+  border-color: rgba(120, 190, 255, 0.7);
+  box-shadow:
+    0 0 0 1px rgba(120, 190, 255, 0.18),
+    0 0 18px rgba(60, 140, 255, 0.15);
+  background: rgba(37, 99, 235, 0.12);
+}
+
+/* ===== Delete button ===== */
+
+.deleteBtn {
+  composes: actionBtn;
+}
+
+.deleteBtn:hover {
+  border-color: rgba(255, 120, 120, 0.75);
+  box-shadow:
+    0 0 0 1px rgba(255, 120, 120, 0.18),
+    0 0 22px rgba(255, 80, 80, 0.15);
+  background: rgba(255, 60, 60, 0.08);
+}
+
+/* ===== Dropdown menu ===== */
+
+.menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+
+  min-width: 180px;
+  padding: 6px;
+
+  border-radius: 14px;
+
+  composes: panel from "@/styles/panel.module.css";
+
+  display: flex;
+  flex-direction: column;
+}
+
+.menuItem {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+
+  cursor: pointer;
+
+  display: flex; 
+  align-items: center;
+  gap: 10px;
+
+  transition: background 0.18s ease;
+}
+
+.menuIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+
+  opacity: 0.9;
+}
+
+.menuItem:hover {
+  background: rgba(37, 99, 235, 0.2);
+}
+
+/* ===== Rest of existing styles ===== */
+
+.projectDesc {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.statusRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(60, 255, 140, 0.9);
+  box-shadow: 0 0 14px rgba(60, 255, 140, 0.25);
+}
+
+.statusText {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.metricsBar {
+  margin-top: 14px;
+  border-radius: 14px;
+  padding: 12px 14px;
+
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.metric {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.metricLabel {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.metricValue {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.92);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.projectNameWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.titlePinIcon {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  opacity: 0.92;
+  flex-shrink: 0;
+}
