@@ -12,6 +12,9 @@ export type EngineOutput = {
   co2Emissions: number;
 };
 
+const GRAPHQL_ENDPOINT =
+  process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:8080/graphql";
+
 const GRAPHQL_QUERY = `
   query EngineOutputs($projectId: String!) {
     engineOutputs(projectId: $projectId) {
@@ -31,7 +34,7 @@ const GRAPHQL_QUERY = `
 `;
 
 export async function fetchEngineOutputs(projectId: string): Promise<EngineOutput[]> {
-  const response = await fetch("http://localhost:8080/graphql", {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -39,6 +42,7 @@ export async function fetchEngineOutputs(projectId: string): Promise<EngineOutpu
       variables: { projectId },
     }),
   });
+
   const json = await response.json();
   return json.data?.engineOutputs ?? [];
 }
@@ -62,7 +66,7 @@ const GRAPHQL_QUERY_ALL = `
 `;
 
 export async function fetchAllEngineOutputs(): Promise<EngineOutput[]> {
-  const response = await fetch("http://localhost:8080/graphql", {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

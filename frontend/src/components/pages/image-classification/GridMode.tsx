@@ -8,6 +8,8 @@ type ViewMode = "table" | "grid";
 type Vote = "up" | "down" | "unsure" | null;
 
 const STORAGE_PREFIX = "grid_votes_v2";
+const GRAPHQL_ENDPOINT =
+  process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:8080/graphql";
 
 function confidenceClass(conf: number) {
   const pct = conf * 100;
@@ -204,7 +206,7 @@ export default function GridMode({
     imageURL: string,
     vote: string,
   ) => {
-    await fetch("http://localhost:8080/graphql", {
+    await fetch(GRAPHQL_ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -248,7 +250,7 @@ export default function GridMode({
     currentProjectId: string,
     resultId: string | number,
   ) => {
-    await fetch("http://localhost:8080/graphql", {
+    await fetch(GRAPHQL_ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
