@@ -9,7 +9,7 @@ type Vote = "up" | "down" | "unsure" | null;
 
 const STORAGE_PREFIX = "grid_votes_v2";
 const GRAPHQL_ENDPOINT =
-  process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:8080/graphql";
+  process.env.NEXT_PUBLIC_GRAPHQL_URL!;
 
 function confidenceClass(conf: number) {
   const pct = conf * 100;

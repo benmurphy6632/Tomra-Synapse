@@ -13,7 +13,7 @@ const GRAPHQL_QUERY = `
 
 export async function fetchAvailableModels(): Promise<AvailableModel[]> {
   const endpoint =
-    process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:8080/graphql";
+    process.env.NEXT_PUBLIC_GRAPHQL_URL!;
 
   const response = await fetch(endpoint, {
     method: "POST",

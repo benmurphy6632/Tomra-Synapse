@@ -24,7 +24,7 @@ const FEEDBACK_VOTES_QUERY = `
 
 export async function fetchFeedbackVotes(projectId: string): Promise<FeedbackVote[]> {
   const endpoint =
-    process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:8080/graphql";
+    process.env.NEXT_PUBLIC_GRAPHQL_URL!;
 
   try {
     const res = await fetch(endpoint, {

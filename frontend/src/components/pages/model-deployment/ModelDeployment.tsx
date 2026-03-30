@@ -153,7 +153,7 @@ function readModelStatuses(projectId: string): Record<string, ModelStatus> {
 
 async function fetchEngineOutputs(projectId: string): Promise<EngineOutput[]> {
   const endpoint =
-    process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:8080/graphql";
+    process.env.NEXT_PUBLIC_GRAPHQL_URL!;
 
   try {
     const res = await fetch(endpoint, {
@@ -951,7 +951,7 @@ export default function ModelDeployment({ projectId }: { projectId: string }) {
       setLoadButtonState("loading");
 
       const endpoint =
-        process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:8080/graphql";
+        process.env.NEXT_PUBLIC_GRAPHQL_URL!;
 
       const response = await fetch(endpoint, {
         method: "POST",

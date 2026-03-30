@@ -65,7 +65,7 @@ const axisProps = {
 
 async function fetchEngineOutputs(projectId: string): Promise<EngineOutput[]> {
   const endpoint =
-    process.env.NEXT_PUBLIC_GRAPHQL_URL || "http://localhost:8080/graphql";
+    process.env.NEXT_PUBLIC_GRAPHQL_URL!;
 
   try {
     const res = await fetch(endpoint, {
